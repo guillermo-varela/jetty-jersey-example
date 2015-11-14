@@ -1,0 +1,35 @@
+plugins {
+  id 'net.researchgate.release' version '2.0.2'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+mainClassName = 'com.blogspot.nombre_temp.jetty.jersey.example.ExampleStarter'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Jetty and Jersey Example', 'Implementation-Version': version
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.8'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.eclipse.jetty:jetty-server:$jettyVersion"
+    compile "org.eclipse.jetty:jetty-servlet:$jettyVersion"
+
+    compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
+    compile "org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion"
+    compile "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyVersion"
+}
